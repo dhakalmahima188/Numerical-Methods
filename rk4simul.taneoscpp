@@ -1,0 +1,45 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+float f(float x, float y, float z)
+{
+       return (3*x+y-z);
+}
+float g(float x, float y, float z)
+{
+       return (2*x-y+z);
+}
+int main() {
+	cout << "Enter the initial condition (xo, yo, zo): ";
+	float xn, h, x, y, z, l,k, k1, k2, k3, k4, l1, l2, l3, l4;
+	int n;
+	cin >> x >> y>> z;
+	cout << "Enter the number of divisions: " ;
+	cin >> n;
+	cout << "Enter the final value of x: " ;
+	cin >> xn;
+    cout << "Enter the final value of h: " ;
+    cin >> h;
+	// h = (xn - x) / n;
+    // h=0.5;
+cout<<" x"<<"\t"<< "y"<<"\t\t"<< "z"<< endl;    
+cout<<endl<<"-----------------------------------------------"<<endl;
+	for (int i = 0; i < n; i++) {
+		k1 = h * f(x, y, z);
+		l1 = h * g(x, y, z);
+		k2 = h * f(x + (h / 2.f), y + (k1 / 2.f), z + (l1 / 2.f));
+		l2 = h * g(x + (h / 2.f), y + (k1 / 2.f), z + (l1 / 2.f));
+		k3 = h * f(x + (h / 2.f), y + (k2 / 2.f), z + (l2 / 2.f));
+		l3 = h * g(x + (h / 2.f), y + (k2 / 2.f), z + (l2 / 2.f));
+		k4 = h * f(x + h, y + k3, z + l3);
+		l4 = h * g(x + h, y + k3, z + l3);
+		k = (k1 + 2 * k2 + 2 * k3 + k4) / 6.f;
+		l = (l1 + 2 * l2 + 2 * l3 + l4) / 6.f;
+		z = z + l;
+        cout<< x<<"\t"<< y<<"\t\t"<< z<< endl;
+		y = y + k;
+		x = x + h;
+        
+		
+	}
+}
